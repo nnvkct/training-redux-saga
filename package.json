@@ -26,7 +26,8 @@
     "linting": "eslint src",
     "prettier": "prettier \"src/**/*.{js,css}\"",
     "format": "npm run prettier -- --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -63,8 +64,7 @@
   "lint-staged": {
     "**/*.{js,css}": [
       "eslint src",
-      "npm run format",
-      "git add"
+      "npm run format"
     ]
   }
 }
