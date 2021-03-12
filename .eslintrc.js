@@ -24,7 +24,7 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'react/no-array-index-key': 1,
     'no-unused-vars': 1,
-    'react/prefer-stateless-function': 1,
+    'react/prefer-stateless-function': 0,
     'import/extensions': 1,
     'import/prefer-default-export': 'off',
     'react/jsx-uses-vars': 2,
