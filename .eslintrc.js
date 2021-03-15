@@ -28,5 +28,6 @@ module.exports = {
     'import/extensions': 1,
     'import/prefer-default-export': 'off',
     'react/jsx-uses-vars': 2,
+    'no-console': 0,
   },
 };
