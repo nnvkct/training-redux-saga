@@ -28,6 +28,8 @@ module.exports = {
     'import/extensions': 1,
     'import/prefer-default-export': 'off',
     'react/jsx-uses-vars': 2,
-    'no-console': 0,
+    'no-console': 1,
+    'require-yield': 1,
+    'import/newline-after-import': ['error', { count: 2 }],
   },
 };
