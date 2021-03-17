@@ -30,6 +30,5 @@ module.exports = {
     'react/jsx-uses-vars': 2,
     'no-console': 1,
     'require-yield': 1,
-    'import/newline-after-import': ['error', { count: 2 }],
   },
 };
