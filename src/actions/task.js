@@ -4,15 +4,15 @@ import * as taskConstants from '../constants/task';
 export const fetchListTaskSuccess = (data) => ({
   type: taskConstants.FETCH_TASK_SUCESS,
   payload: {
-    data,
-  },
+    data
+  }
 });
 
 export const fetchListTaskFailed = (error) => ({
   type: taskConstants.FETCH_TASK_FAILED,
   payload: {
-    error,
-  },
+    error
+  }
 });
 
 export const fetchListTask = () => ({ type: taskConstants.FETCH_TASK });

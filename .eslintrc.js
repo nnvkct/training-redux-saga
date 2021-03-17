@@ -4,18 +4,22 @@ module.exports = {
     ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   env: {
     browser: true,
     amd: true,
-    node: true,
+    node: true
   },
   extends: ['airbnb', 'prettier'],
   plugins: ['prettier'],
   rules: {
-    'prettier/prettier': 1,
+    quotes: [
+      'error',
+      'single',
+      { avoidEscape: true, allowTemplateLiterals: false }
+    ],
     'react/prop-types': 1,
     'react/jsx-max-props-per-line': 1,
     'import/no-extraneous-dependencies': 0,
@@ -29,6 +33,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/jsx-uses-vars': 2,
     'no-console': 1,
-    'require-yield': 1,
-  },
+    'require-yield': 1
+  }
 };

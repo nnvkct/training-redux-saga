@@ -15,7 +15,7 @@ import styles from './styles';
 
 class TaskBoard extends Component {
   state = {
-    open: false,
+    open: false
   };
 
   componentDidMount() {
@@ -26,13 +26,13 @@ class TaskBoard extends Component {
 
   handleClose = () => {
     this.setState({
-      open: false,
+      open: false
     });
   };
 
   openForm = () => {
     this.setState({
-      open: true,
+      open: true
     });
   };
 
@@ -88,13 +88,13 @@ const mapStatetoProps = (state) => ({ listTask: state.task.listTask });
 TaskBoard.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   taskActionCreators: PropTypes.shape({
-    fetchListTaskRequest: PropTypes.func,
+    fetchListTaskRequest: PropTypes.func
   }).isRequired,
-  listTask: PropTypes.arrayOf(PropTypes.string).isRequired,
+  listTask: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  taskActionCreators: bindActionCreators(taskActions, dispatch),
+  taskActionCreators: bindActionCreators(taskActions, dispatch)
 });
 
 export default withStyles(styles)(
