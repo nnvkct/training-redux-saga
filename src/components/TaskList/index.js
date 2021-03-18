@@ -1,7 +1,8 @@
+import { Box, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
-import { Box, Grid, withStyles } from '@material-ui/core';
-import styles from './styles';
 import TaskItem from '../TaskItem';
+import styles from './styles';
 
 class TaskList extends Component {
   render() {

@@ -3,11 +3,11 @@ import {
   CardActions,
   CardContent,
   Grid,
-  Typography,
-  withStyles
+  Typography
 } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
+import { withStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
 import styles from './styles';
 
