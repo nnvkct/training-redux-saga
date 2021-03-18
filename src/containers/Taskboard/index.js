@@ -89,8 +89,8 @@ TaskBoard.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   taskActionCreators: PropTypes.shape({
     fetchListTaskRequest: PropTypes.func
-  }).isRequired,
-  listTask: PropTypes.arrayOf(PropTypes.string).isRequired
+  }).isRequired
+  // listTask: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

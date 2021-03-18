@@ -2,7 +2,8 @@ import { fork, take } from 'redux-saga/effects';
 import * as taskTypes from '../constants/task';
 
 function* watchFetchListTaskAction() {
-  console.log('watching create task action 2');
+  yield take(taskTypes.FETCH_TASK);
+  console.log('watching fetch list task action');
 }
 
 function* watchCreateTaskAction() {
@@ -11,7 +12,7 @@ function* watchCreateTaskAction() {
 
 function* rootSaga() {
   yield fork(watchFetchListTaskAction);
-  // yield fork(watchCreateTaskAction);
+  yield fork(watchCreateTaskAction);
 }
 
 export default rootSaga;
