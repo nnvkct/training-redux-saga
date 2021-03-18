@@ -2,7 +2,7 @@ import { fork, take } from 'redux-saga/effects';
 import * as taskTypes from '../constants/task';
 
 function* watchFetchListTaskAction() {
-  console.log('watching create task action 6');
+  console.log('watching create task action 7');
 }
 
 function* watchCreateTaskAction() {
