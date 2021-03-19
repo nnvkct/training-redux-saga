@@ -6,14 +6,16 @@ const styles = () => ({
     top: 0,
     bottom: 0,
     zIndex: 99,
-    background: 'rgba(0,0,0,0.4)'
+    background: 'rgba(0,0,0,0.4)',
   },
   icon: {
-    position: 'fixed',
-    right: '50%',
+    position: 'relative',
     top: '40%',
-    width: 100
-  }
+    width: 100,
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 });
 
 export default styles;

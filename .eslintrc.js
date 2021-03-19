@@ -4,13 +4,13 @@ module.exports = {
     ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   env: {
     browser: true,
     amd: true,
-    node: true
+    node: true,
   },
   extends: ['airbnb', 'prettier'],
   plugins: ['prettier'],
@@ -18,7 +18,7 @@ module.exports = {
     quotes: [
       'error',
       'single',
-      { avoidEscape: true, allowTemplateLiterals: false }
+      { avoidEscape: true, allowTemplateLiterals: false },
     ],
     'react/prop-types': 1,
     'react/jsx-first-prop-new-line': [2, 'multiline'],
@@ -36,6 +36,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/jsx-uses-vars': 2,
     'no-console': 1,
-    'require-yield': 1
-  }
+    'require-yield': 1,
+    'comma-dangle': [2, 'always-multiline'],
+  },
 };

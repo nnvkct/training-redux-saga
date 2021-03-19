@@ -3,7 +3,7 @@ import {
   CardActions,
   CardContent,
   Grid,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';

@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as taskActions from '../../actions/task';
+import SearchBox from '../../components/SearchBox';
 import TaskForm from '../../components/TaskForm';
 import TaskList from '../../components/TaskList';
 import { STATUSES } from '../../constants';
@@ -15,31 +16,50 @@ import styles from './styles';
 
 class TaskBoard extends Component {
   state = {
-    open: false
+    open: false,
   };
 
-  componentDidMount() {
-    const { taskActionCreators } = this.props;
-    const { fetchListTaskRequest } = taskActionCreators;
-    fetchListTaskRequest();
-  }
+  // componentDidMount() {
+  //   const { taskActionCreators } = this.props;
+  //   const { fetchListTask } = taskActionCreators;
+  //   fetchListTask();
+  // }
 
   handleClose = () => {
     this.setState({
-      open: false
+      open: false,
     });
   };
 
   openForm = () => {
     this.setState({
-      open: true
+      open: true,
     });
+  };
+
+  loadData = () => {
+    const { taskActionCreators } = this.props;
+    const { fetchListTask } = taskActionCreators;
+    fetchListTask();
+  };
+
+  handleFilter = (e) => {
+    const { value } = e.target;
+    const { taskActionCreators } = this.props;
+    const { filterTask } = taskActionCreators;
+    filterTask(value);
   };
 
   renderForm() {
     const { open } = this.state;
     let xhtml = null;
     xhtml = <TaskForm open={open} onClose={this.handleClose} />;
+    return xhtml;
+  }
+
+  renderSerchBox() {
+    let xhtml = null;
+    xhtml = <SearchBox handleChange={this.handleFilter} />;
     return xhtml;
   }
 
@@ -63,8 +83,17 @@ class TaskBoard extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Box mt={1}>
+        <Box mt={1} ml={1} mr={1}>
           <div className={classes.taskboard}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={this.loadData}
+              style={{ marginRight: 20 }}
+            >
+              Load Data
+            </Button>
             <Button
               variant="contained"
               color="primary"
@@ -75,6 +104,7 @@ class TaskBoard extends Component {
               Thêm mới công việc
             </Button>
           </div>
+          {this.renderSerchBox()}
           {this.renderBoard()}
           {this.renderForm()}
         </Box>
@@ -88,13 +118,14 @@ const mapStatetoProps = (state) => ({ listTask: state.task.listTask });
 TaskBoard.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   taskActionCreators: PropTypes.shape({
-    fetchListTaskRequest: PropTypes.func
-  }).isRequired
+    fetchListTask: PropTypes.func,
+    filterTask: PropTypes.func,
+  }).isRequired,
   // listTask: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  taskActionCreators: bindActionCreators(taskActions, dispatch)
+  taskActionCreators: bindActionCreators(taskActions, dispatch),
 });
 
 export default withStyles(styles)(
