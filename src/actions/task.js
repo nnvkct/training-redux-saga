@@ -17,15 +17,16 @@ export const fetchListTaskFailed = (error) => ({
 
 export const fetchListTask = () => ({ type: taskConstants.FETCH_TASK });
 
-export const fetchListTaskRequest = () => (dispatch) => {
-  dispatch(fetchListTask());
-  taskApis
-    .getList()
-    .then((response) => {
-      const { data } = response;
-      dispatch(fetchListTaskSuccess(data));
-    })
-    .catch((error) => {
-      dispatch(fetchListTaskFailed(error));
-    });
-};
+export const filterTask = (keyword) => ({
+  type: taskConstants.FILTER_TASK,
+  payload: {
+    keyword,
+  },
+});
+
+export const filterTaskSuccess = (data) => ({
+  type: taskConstants.FILTER_TASK_SUCCESS,
+  payload: {
+    data,
+  },
+});

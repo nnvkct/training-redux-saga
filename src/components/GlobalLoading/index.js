@@ -1,11 +1,10 @@
 import { withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators, compose } from 'redux';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styles from './styles';
+import { compose } from 'redux';
 import LoadingIcon from '../../assets/images/loading.gif';
-import * as uiAction from '../../actions/ui';
+import styles from './styles';
 
 class GlobalLoading extends Component {
   render() {
@@ -25,8 +24,8 @@ class GlobalLoading extends Component {
 
 GlobalLoading.propTypes = {
   classes: PropTypes.shape({
-    globalLoading: PropTypes.shape({}).isRequired,
-    icon: PropTypes.shape({}).isRequired,
+    globalLoading: PropTypes.shape.isRequired,
+    icon: PropTypes.shape.isRequired,
   }).isRequired,
   showLoading: PropTypes.bool.isRequired,
 };
