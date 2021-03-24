@@ -22,6 +22,7 @@ const reducer = (state = initialState, action) => {
     }
     case taskConstants.FETCH_TASK_FAILED: {
       const { error } = action.payload;
+      console.log('NNV is testing:', error);
       toastError(error);
       return {
         ...state,

@@ -22,12 +22,21 @@ function* watchFetchListTaskAction() {
   while (true) {
     yield take(taskTypes.FETCH_TASK);
     yield put(showLoading());
-    const resp = yield call(getList);
-    const { status, data } = resp;
+    let resp = null;
+    try {
+      resp = yield call(getList);
+    } catch (error) {
+      resp = { ...error }.response;
+      console.log('resp: ', resp);
+    }
+    // const resp = yield call(getList);  : "Not Found"
+    const { status, data, statusText } = resp;
+    // console.log('======================================================: ');
+    console.log('status: ', status);
     if (status === STATUS_CODE.SUCCESS) {
       yield put(fetchListTaskSuccess(data));
     } else {
-      yield put(fetchListTaskFailed(data));
+      yield put(fetchListTaskFailed(statusText));
     }
     yield delay(1000);
     yield put(hideLoading());
