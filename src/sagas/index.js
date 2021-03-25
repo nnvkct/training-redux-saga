@@ -1,12 +1,4 @@
-import {
-  call,
-  delay,
-  fork,
-  put,
-  take,
-  takeLatest,
-  select,
-} from 'redux-saga/effects';
+import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import {
   fetchListTask,
   fetchListTaskFailed,
@@ -19,42 +11,45 @@ import { STATUS_CODE } from '../constants';
 import * as taskTypes from '../constants/task';
 
 function* watchFetchListTaskAction() {
-  while (true) {
-    yield take(taskTypes.FETCH_TASK);
-    yield put(showLoading());
-    let resp = null;
-    try {
-      resp = yield call(getList);
-    } catch (error) {
-      resp = { ...error }.response;
-      console.log('resp: ', resp);
-    }
-    // const resp = yield call(getList);  : "Not Found"
-    const { status, data, statusText } = resp;
-    // console.log('======================================================: ');
-    console.log('status: ', status);
-    if (status === STATUS_CODE.SUCCESS) {
-      yield put(fetchListTaskSuccess(data));
-    } else {
-      yield put(fetchListTaskFailed(statusText));
-    }
-    yield delay(1000);
-    yield put(hideLoading());
+  yield put(showLoading());
+  let resp = null;
+  try {
+    resp = yield call(getList);
+  } catch (error) {
+    console.log('resp1: ', { ...error });
+    resp = { ...error }.response;
+    console.log('resp2: ', resp);
   }
+  // const resp = yield call(getList);  : "Not Found"
+  const { status, data, statusText } = resp;
+  // console.log('======================================================: ');
+  console.log('status: ', status);
+  if (status === STATUS_CODE.SUCCESS) {
+    yield put(fetchListTaskSuccess(data));
+  } else {
+    yield put(fetchListTaskFailed(statusText));
+  }
+  yield delay(1000);
+  yield put(hideLoading());
 }
 
 function* filterTaskSaga({ payload }) {
   yield delay(500);
   const { keyword } = payload;
-  const list = yield select((state) => state.task.listTask);
-  const filterTask = list.filter((task) =>
-    task.title.trim().toLowerCase().includes(keyword.trim())
-  );
-  yield put(filterTaskSuccess(filterTask));
+
+  if (keyword === '') {
+    yield put(fetchListTask());
+  } else {
+    const list = yield select((state) => state.task.listTask);
+    const filterTask = list.filter((task) =>
+      task.title.trim().toLowerCase().includes(keyword.trim())
+    );
+    yield put(filterTaskSuccess(filterTask));
+  }
 }
 
 function* rootSaga() {
-  yield fork(watchFetchListTaskAction);
+  yield takeLatest(taskTypes.FETCH_TASK, watchFetchListTaskAction);
   yield takeLatest(taskTypes.FILTER_TASK, filterTaskSaga);
 }
 

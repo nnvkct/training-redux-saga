@@ -21,6 +21,7 @@ class AxiosService {
   }
 
   get(url) {
+    console.log('im rehre!!!');
     return this.instance.get(url);
   }
 }
