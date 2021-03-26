@@ -7,14 +7,14 @@ import {
 } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
-import { withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import { withStyles, } from '@material-ui/styles';
+import React, { Component, } from 'react';
 import styles from './styles';
 
 class TaskItem extends Component {
   render() {
-    const { task, classes, status } = this.props;
-    const { title, id, description } = task;
+    const { task, classes, status, } = this.props;
+    const { title, id, description, } = task;
     return (
       <Card key={id} className={classes.card}>
         <CardContent>

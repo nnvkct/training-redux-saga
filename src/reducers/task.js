@@ -1,5 +1,5 @@
 import * as taskConstants from '../constants/task';
-import { toastError } from '../helpers/toastHelper';
+import { toastError, } from '../helpers/toastHelper';
 
 const initialState = {
   listTask: [],
@@ -14,15 +14,15 @@ const reducer = (state = initialState, action) => {
       };
     }
     case taskConstants.FETCH_TASK_SUCESS: {
-      const { data } = action.payload;
+      const { data, } = action.payload;
       return {
         ...state,
         listTask: data,
       };
     }
     case taskConstants.FETCH_TASK_FAILED: {
-      const { error } = action.payload;
-      console.log('NNV is testing:', error);
+      const { error, } = action.payload;
+      console.log('error333: ', error);
       toastError(error);
       return {
         ...state,
@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
       };
     }
     case taskConstants.FILTER_TASK_SUCCESS: {
-      const { data } = action.payload;
+      const { data, } = action.payload;
       return {
         ...state,
         listTask: data,

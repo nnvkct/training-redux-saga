@@ -1,14 +1,14 @@
-import { withStyles } from '@material-ui/styles';
+import { withStyles, } from '@material-ui/styles';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import React, { Component, } from 'react';
+import { connect, } from 'react-redux';
+import { compose, } from 'redux';
 import LoadingIcon from '../../assets/images/loading.gif';
 import styles from './styles';
 
 class GlobalLoading extends Component {
   render() {
-    const { classes, showLoading } = this.props;
+    const { classes, showLoading, } = this.props;
     let xhtml = null;
     if (showLoading) {
       xhtml = (
@@ -29,6 +29,7 @@ GlobalLoading.propTypes = {
   }).isRequired,
   showLoading: PropTypes.bool.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   showLoading: state.ui.showLoading,
 });

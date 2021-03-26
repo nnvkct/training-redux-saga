@@ -1,12 +1,12 @@
-import { TextField } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import { TextField, } from '@material-ui/core';
+import { withStyles, } from '@material-ui/styles';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
 class SearchBox extends Component {
   render() {
-    const { classes, handleChange } = this.props;
+    const { classes, handleChange, } = this.props;
     return (
       <form className={classes.container} noValidate autoComplete="off">
         <div>

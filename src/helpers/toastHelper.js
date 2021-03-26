@@ -1,11 +1,13 @@
-import { toast } from 'react-toastify';
+import { toast, } from 'react-toastify';
 
 export const toastError = (error) => {
-  // if (typeof error === 'object' && error.message) {
-  //   ({ message } = error);
-  // }
+  let message = null;
+  if (typeof error === 'object' && error.message) {
+    ({ message, } = error);
+  }
 
-  // if (message !== null && typeof message !== 'undefined' && message !== '') {
-  toast.error(error);
-  // }
+  if (message !== null && typeof message !== 'undefined' && message !== '') {
+    // console.log('typeof error: ', JSON.stringify(error));
+    toast.error(message);
+  }
 };

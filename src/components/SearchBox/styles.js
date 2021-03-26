@@ -1,6 +1,6 @@
 const styles = () => ({
   container: {},
-  textField: { width: '30%' },
+  textField: { width: '30%', },
 });
 
 export default styles;

@@ -14,7 +14,7 @@ export const fetchListTaskFailed = (error) => ({
   },
 });
 
-export const fetchListTask = () => ({ type: taskConstants.FETCH_TASK });
+export const fetchListTask = () => ({ type: taskConstants.FETCH_TASK, });
 
 export const filterTask = (keyword) => ({
   type: taskConstants.FILTER_TASK,
