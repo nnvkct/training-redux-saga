@@ -10,7 +10,7 @@ import { bindActionCreators, } from 'redux';
 import * as taskActions from '../../actions/task';
 import * as modalActions from '../../actions/modal';
 import SearchBox from '../../components/SearchBox';
-import TaskForm from '../../components/TaskForm';
+import TaskForm from '../TaskForm';
 import TaskList from '../../components/TaskList';
 import { STATUSES, } from '../../constants';
 import styles from './styles';

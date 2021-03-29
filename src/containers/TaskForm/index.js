@@ -5,30 +5,55 @@ import PropTypes from 'prop-types';
 import React, { Component, } from 'react';
 import { connect, } from 'react-redux';
 import { bindActionCreators, compose, } from 'redux';
+import { Field, reduxForm, } from 'redux-form';
 import * as modalActions from '../../actions/modal';
+import renderTextField from '../../components/FormHelper/TextField';
 import styles from './styles';
 
 class TaskForm extends Component {
+  handleSumbitForm = (data) => {
+    console.log('data: ', data);
+  };
+
   render() {
-    const { classes, modalActionsCreator, } = this.props;
+    const { classes, modalActionsCreator, handleSubmit, } = this.props;
     const { hideModal, } = modalActionsCreator;
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.handleSumbitForm)}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
+            {/* <TextField
               id="standard-basic"
               label="Tiêu đề"
               className={classes.textfield}
+            /> */}
+
+            <Field
+              id="title"
+              label="Tiêu đề"
+              className={classes.textfield}
+              margin="normal"
+              name="title"
+              component={renderTextField}
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            {/* <TextField
               id="standard-textarea"
               label="Mô tả"
               placeholder="Placeholder"
               multiline
               className={classes.textfield}
+            /> */}
+            <Field
+              id="description"
+              label="Mô tả"
+              multiline
+              rowsMax="4"
+              className={classes.textfield}
+              margin="normal"
+              name="description"
+              component={renderTextField}
             />
           </Grid>
 
@@ -44,7 +69,7 @@ class TaskForm extends Component {
                 </Button>
               </Box>
 
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" type="submit">
                 Lưu lại
               </Button>
             </Box>
@@ -60,6 +85,7 @@ TaskForm.propTypes = {
     modal: PropTypes.shape.isRequired,
     textfield: PropTypes.shape.isRequired,
   }).isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -68,4 +94,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 const withConnect = connect(null, mapDispatchToProps);
 
-export default compose(withStyles(styles), withConnect)(TaskForm);
+const FORM_NAME = 'TASK_MANAGEMENT';
+const withReduxForm = reduxForm({
+  // a unique name for the form
+  form: FORM_NAME,
+});
+
+export default compose(
+  withStyles(styles),
+  withConnect,
+  withReduxForm
+)(TaskForm);
