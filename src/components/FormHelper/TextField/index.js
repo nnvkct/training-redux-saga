@@ -23,8 +23,8 @@ const renderTextField = ({
 
 renderTextField.propTypes = {
   label: PropTypes.string.isRequired,
-  input: PropTypes.shape.isRequired,
-  meta: PropTypes.shape.isRequired,
+  input: PropTypes.shape({}).isRequired,
+  meta: PropTypes.shape({}).isRequired,
 };
 
 export default withStyles(styles)(renderTextField);

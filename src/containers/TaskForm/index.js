@@ -1,5 +1,4 @@
 import { Box, Button, Grid, } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
 import { withStyles, } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, { Component, } from 'react';
@@ -7,27 +6,34 @@ import { connect, } from 'react-redux';
 import { bindActionCreators, compose, } from 'redux';
 import { Field, reduxForm, } from 'redux-form';
 import * as modalActions from '../../actions/modal';
+import * as taskActions from '../../actions/task';
 import renderTextField from '../../components/FormHelper/TextField';
 import styles from './styles';
+import validate from './validate';
 
 class TaskForm extends Component {
   handleSumbitForm = (data) => {
     console.log('data: ', data);
+    const { taskActionsCreator, } = this.props;
+    const { addTask, } = taskActionsCreator;
+    const { title, description, } = data;
+    addTask(title, description);
   };
 
   render() {
-    const { classes, modalActionsCreator, handleSubmit, } = this.props;
+    const {
+      classes,
+      modalActionsCreator,
+      handleSubmit,
+      invalid,
+      submmitting,
+    } = this.props;
+
     const { hideModal, } = modalActionsCreator;
     return (
       <form onSubmit={handleSubmit(this.handleSumbitForm)}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {/* <TextField
-              id="standard-basic"
-              label="Tiêu đề"
-              className={classes.textfield}
-            /> */}
-
             <Field
               id="title"
               label="Tiêu đề"
@@ -35,16 +41,10 @@ class TaskForm extends Component {
               margin="normal"
               name="title"
               component={renderTextField}
+              // validate={[this.required, this.minLength5,]}
             />
           </Grid>
           <Grid item xs={12}>
-            {/* <TextField
-              id="standard-textarea"
-              label="Mô tả"
-              placeholder="Placeholder"
-              multiline
-              className={classes.textfield}
-            /> */}
             <Field
               id="description"
               label="Mô tả"
@@ -69,7 +69,12 @@ class TaskForm extends Component {
                 </Button>
               </Box>
 
-              <Button variant="contained" color="primary" type="submit">
+              <Button
+                disabled={invalid || submmitting}
+                variant="contained"
+                color="primary"
+                type="submit"
+              >
                 Lưu lại
               </Button>
             </Box>
@@ -86,10 +91,23 @@ TaskForm.propTypes = {
     textfield: PropTypes.shape.isRequired,
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  modalActionsCreator: PropTypes.shape({
+    hideModal: PropTypes.func.isRequired,
+  }).isRequired,
+  taskActionsCreator: PropTypes.shape({
+    addTask: PropTypes.func.isRequired,
+  }).isRequired,
+  invalid: PropTypes.bool.isRequired,
+  submmitting: PropTypes.bool,
+};
+
+TaskForm.defaultProps = {
+  submmitting: null,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   modalActionsCreator: bindActionCreators(modalActions, dispatch),
+  taskActionsCreator: bindActionCreators(taskActions, dispatch),
 });
 
 const withConnect = connect(null, mapDispatchToProps);
@@ -98,6 +116,7 @@ const FORM_NAME = 'TASK_MANAGEMENT';
 const withReduxForm = reduxForm({
   // a unique name for the form
   form: FORM_NAME,
+  validate,
 });
 
 export default compose(

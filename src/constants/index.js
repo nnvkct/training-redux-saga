@@ -1,4 +1,4 @@
-export const API_ENDPOINT = 'http://localhost:3000';
+export const API_ENDPOINT = 'http://192.168.43.151:3000';
 export const STATUSES = [
   {
     value: 0,

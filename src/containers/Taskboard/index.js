@@ -6,13 +6,14 @@ import { withStyles, } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, { Component, } from 'react';
 import { connect, } from 'react-redux';
+import uuid from 'react-uuid';
 import { bindActionCreators, } from 'redux';
-import * as taskActions from '../../actions/task';
 import * as modalActions from '../../actions/modal';
+import * as taskActions from '../../actions/task';
 import SearchBox from '../../components/SearchBox';
-import TaskForm from '../TaskForm';
 import TaskList from '../../components/TaskList';
 import { STATUSES, } from '../../constants';
+import TaskForm from '../TaskForm';
 import styles from './styles';
 
 class TaskBoard extends Component {
@@ -58,11 +59,11 @@ class TaskBoard extends Component {
     let xhtml = null;
     xhtml = (
       <Grid container spacing={2}>
-        {STATUSES.map((status, index) => {
+        {STATUSES.map((status) => {
           const taskFilter = listTask.filter(
             (task) => task.status === status.value
           );
-          return <TaskList tasks={taskFilter} status={status} key={index} />;
+          return <TaskList tasks={taskFilter} status={status} key={uuid()} />;
         })}
       </Grid>
     );
@@ -106,7 +107,10 @@ class TaskBoard extends Component {
 const mapStatetoProps = (state) => ({ listTask: state.task.listTask, });
 
 TaskBoard.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({
+    taskboard: PropTypes.shape.isRequired,
+    button: PropTypes.shape.isRequired,
+  }).isRequired,
   taskActionCreators: PropTypes.shape({
     fetchListTask: PropTypes.func,
     filterTask: PropTypes.func,
@@ -117,6 +121,7 @@ TaskBoard.propTypes = {
     changeModalTitle: PropTypes.func,
     changeModalContent: PropTypes.func,
   }).isRequired,
+  listTask: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

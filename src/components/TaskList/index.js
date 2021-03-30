@@ -1,6 +1,7 @@
 import { Box, Grid, } from '@material-ui/core';
 import { withStyles, } from '@material-ui/styles';
 import React, { Component, } from 'react';
+import PropTypes from 'prop-types';
 import TaskItem from '../TaskItem';
 import styles from './styles';
 
@@ -21,5 +22,17 @@ class TaskList extends Component {
     );
   }
 }
+
+TaskList.propTypes = {
+  classes: PropTypes.shape({
+    status: PropTypes.shape.isRequired,
+    wrapperListTask: PropTypes.shape.isRequired,
+  }).isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  status: PropTypes.shape({
+    value: PropTypes.number.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default withStyles(styles)(TaskList);

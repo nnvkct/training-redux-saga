@@ -3,3 +3,5 @@ import { API_ENDPOINT, } from '../constants';
 
 const url = 'tasks';
 export const getList = () => axiosService.get(`${API_ENDPOINT}/${url}`);
+export const addTask = (data) =>
+  axiosService.post(`${API_ENDPOINT}/${url}`, data);

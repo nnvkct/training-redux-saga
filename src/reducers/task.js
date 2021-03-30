@@ -22,7 +22,6 @@ const reducer = (state = initialState, action) => {
     }
     case taskConstants.FETCH_TASK_FAILED: {
       const { error, } = action.payload;
-      console.log('error333: ', error);
       toastError(error);
       return {
         ...state,
@@ -34,6 +33,25 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         listTask: data,
+      };
+    }
+    case taskConstants.ADD_TASK: {
+      return {
+        ...state,
+      };
+    }
+    case taskConstants.ADD_TASK_SUCESS: {
+      const { data, } = action.payload;
+      return {
+        ...state,
+        listTask: state.listTask.concat([data,]),
+      };
+    }
+    case taskConstants.ADD_TASK_FAILED: {
+      const { error, } = action.payload;
+      toastError(error);
+      return {
+        ...state,
       };
     }
     default:

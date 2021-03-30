@@ -32,14 +32,23 @@ class CommonModal extends Component {
 }
 
 CommonModal.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({
+    modal: PropTypes.shape.isRequired,
+    header: PropTypes.shape.isRequired,
+    title: PropTypes.shape.isRequired,
+    icon: PropTypes.shape.isRequired,
+    content: PropTypes.shape.isRequired,
+  }).isRequired,
   open: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  hideModal: PropTypes.func.isRequired,
-  component: PropTypes.shape.isRequired,
+  component: PropTypes.shape(),
   modalActionsCreator: PropTypes.shape({
     hideModal: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+CommonModal.defaultProps = {
+  component: null,
 };
 
 const mapStateToProps = (state) => ({

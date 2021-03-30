@@ -8,6 +8,7 @@ import {
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import { withStyles, } from '@material-ui/styles';
+import PropTypes from 'prop-types';
 import React, { Component, } from 'react';
 import styles from './styles';
 
@@ -55,5 +56,22 @@ class TaskItem extends Component {
     );
   }
 }
+
+TaskItem.propTypes = {
+  classes: PropTypes.shape({
+    card: PropTypes.shape.isRequired,
+    label: PropTypes.shape.isRequired,
+    CardActions: PropTypes.shape.isRequired,
+    fab: PropTypes.shape.isRequired,
+  }).isRequired,
+  task: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  status: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default withStyles(styles)(TaskItem);

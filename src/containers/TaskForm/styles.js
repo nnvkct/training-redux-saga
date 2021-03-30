@@ -1,4 +1,4 @@
-const styles = (theme) => ({
+const styles = () => ({
   textfield: {
     width: '100%',
   },
