@@ -1,28 +1,21 @@
-import {
-  call,
-  delay,
-  put,
-  select,
-  takeLatest,
-  takeEvery,
-} from 'redux-saga/effects';
+import { call, delay, put, takeEvery, takeLatest, } from 'redux-saga/effects';
 import {
   addTaskFailed,
   addTaskSuccess,
   fetchListTask,
   fetchListTaskFailed,
   fetchListTaskSuccess,
-  filterTaskSuccess,
 } from '../actions/task';
 import { hideLoading, showLoading, } from '../actions/ui';
 import { addTask, getList, } from '../apis/task';
-import { STATUS_CODE, STATUSES, } from '../constants';
+import { STATUSES, STATUS_CODE, } from '../constants';
 import * as taskTypes from '../constants/task';
 
-function* watchFetchListTaskAction() {
+function* watchFetchListTaskAction(action) {
   yield put(showLoading());
+  const { params, } = action.payload;
   try {
-    const resp = yield call(getList);
+    const resp = yield call(getList, params);
     const { status, data, } = resp;
     if (status === STATUS_CODE.SUCCESS) {
       yield put(fetchListTaskSuccess(data));
@@ -38,16 +31,11 @@ function* watchFetchListTaskAction() {
 function* filterTaskSaga({ payload, }) {
   yield delay(500);
   const { keyword, } = payload;
-
-  if (keyword === '') {
-    yield put(fetchListTask());
-  } else {
-    const list = yield select((state) => state.task.listTask);
-    const filterTask = list.filter((task) =>
-      task.title.trim().toLowerCase().includes(keyword.trim())
-    );
-    yield put(filterTaskSuccess(filterTask));
-  }
+  yield put(
+    fetchListTask({
+      q: keyword,
+    })
+  );
 }
 
 function* addTaskSaga({ payload, }) {

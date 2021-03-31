@@ -6,3 +6,4 @@ export const FILTER_TASK_SUCCESS = 'FILTER_TASK_SUCCESS';
 export const ADD_TASK = 'ADD_TASK';
 export const ADD_TASK_SUCESS = 'ADD_TASK_SUCESS';
 export const ADD_TASK_FAILED = 'ADD_TASK_FAILED';
+export const SET_TASK_EDITING = 'SET_TASK_EDITING';

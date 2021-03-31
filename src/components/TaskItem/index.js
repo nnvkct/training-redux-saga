@@ -14,7 +14,7 @@ import styles from './styles';
 
 class TaskItem extends Component {
   render() {
-    const { task, classes, status, } = this.props;
+    const { task, classes, status, onClickEdit, } = this.props;
     const { title, id, description, } = task;
     return (
       <Card key={id} className={classes.card}>
@@ -40,6 +40,7 @@ class TaskItem extends Component {
             aria-label="edit"
             className={classes.fab}
             size="small"
+            onClick={onClickEdit}
           >
             <Icon fontSize="small">edit_icon</Icon>
           </Fab>
@@ -72,6 +73,7 @@ TaskItem.propTypes = {
   status: PropTypes.shape({
     label: PropTypes.string.isRequired,
   }).isRequired,
+  onClickEdit: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(TaskItem);

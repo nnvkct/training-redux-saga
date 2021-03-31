@@ -12,8 +12,23 @@ import styles from './styles';
 import validate from './validate';
 
 class TaskForm extends Component {
+  componentDidMount() {
+    const { dispatch, taskEditing, } = this.props;
+    if (dispatch && taskEditing) {
+      dispatch({
+        type: '@@redux-form/CHANGE',
+        meta: { form: 'TASK_MANAGEMENT', field: 'title', },
+        payload: taskEditing.title,
+      });
+      dispatch({
+        type: '@@redux-form/CHANGE',
+        meta: { form: 'TASK_MANAGEMENT', field: 'description', },
+        payload: taskEditing.description,
+      });
+    }
+  }
+
   handleSumbitForm = (data) => {
-    console.log('data: ', data);
     const { taskActionsCreator, } = this.props;
     const { addTask, } = taskActionsCreator;
     const { title, description, } = data;
@@ -41,7 +56,6 @@ class TaskForm extends Component {
               margin="normal"
               name="title"
               component={renderTextField}
-              // validate={[this.required, this.minLength5,]}
             />
           </Grid>
           <Grid item xs={12}>
@@ -99,18 +113,21 @@ TaskForm.propTypes = {
   }).isRequired,
   invalid: PropTypes.bool.isRequired,
   submmitting: PropTypes.bool,
+  taskEditing: PropTypes.shape.isRequired,
 };
 
 TaskForm.defaultProps = {
   submmitting: null,
 };
-
+const mapStateToProps = (state) => ({
+  taskEditing: state.task.taskEditing,
+});
 const mapDispatchToProps = (dispatch) => ({
   modalActionsCreator: bindActionCreators(modalActions, dispatch),
   taskActionsCreator: bindActionCreators(taskActions, dispatch),
 });
 
-const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const FORM_NAME = 'TASK_MANAGEMENT';
 const withReduxForm = reduxForm({

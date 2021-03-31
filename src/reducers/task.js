@@ -3,6 +3,7 @@ import { toastError, } from '../helpers/toastHelper';
 
 const initialState = {
   listTask: [],
+  taskEditing: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,6 +53,13 @@ const reducer = (state = initialState, action) => {
       toastError(error);
       return {
         ...state,
+      };
+    }
+    case taskConstants.SET_TASK_EDITING: {
+      const { task, } = action.payload;
+      return {
+        ...state,
+        taskEditing: task,
       };
     }
     default:

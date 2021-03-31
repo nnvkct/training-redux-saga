@@ -7,7 +7,7 @@ import styles from './styles';
 
 class TaskList extends Component {
   render() {
-    const { classes, tasks, status, } = this.props;
+    const { classes, tasks, status, onClickEdit, } = this.props;
     return (
       <Grid item md={4} xs={12} key={status.value}>
         <Box mt={1} mb={1}>
@@ -15,7 +15,14 @@ class TaskList extends Component {
         </Box>
         <div className={classes.wrapperListTask}>
           {tasks.map((task) => (
-            <TaskItem task={task} key={task.id} status={status} />
+            <Box mb={2}>
+              <TaskItem
+                task={task}
+                key={task.id}
+                status={status}
+                onClickEdit={() => onClickEdit(task)}
+              />
+            </Box>
           ))}
         </div>
       </Grid>
@@ -33,6 +40,7 @@ TaskList.propTypes = {
     value: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired,
   }).isRequired,
+  onClickEdit: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(TaskList);

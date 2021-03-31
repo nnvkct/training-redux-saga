@@ -14,7 +14,10 @@ export const fetchListTaskFailed = (error) => ({
   },
 });
 
-export const fetchListTask = () => ({ type: taskConstants.FETCH_TASK, });
+export const fetchListTask = (params = {}) => ({
+  type: taskConstants.FETCH_TASK,
+  payload: { params, },
+});
 
 export const filterTask = (keyword) => ({
   type: taskConstants.FILTER_TASK,
@@ -47,4 +50,9 @@ export const addTaskFailed = (error) => ({
 export const addTask = (title, description) => ({
   type: taskConstants.ADD_TASK,
   payload: { title, description, },
+});
+
+export const setTaskEditing = (task) => ({
+  type: taskConstants.SET_TASK_EDITING,
+  payload: { task, },
 });
