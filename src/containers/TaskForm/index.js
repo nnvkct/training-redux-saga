@@ -7,6 +7,7 @@ import { bindActionCreators, compose, } from 'redux';
 import { Field, reduxForm, } from 'redux-form';
 import * as modalActions from '../../actions/modal';
 import * as taskActions from '../../actions/task';
+import renderSelectField from '../../components/FormHelper/Select';
 import renderTextField from '../../components/FormHelper/TextField';
 import styles from './styles';
 import validate from './validate';
@@ -27,6 +28,26 @@ class TaskForm extends Component {
     addTask(title, description);
   };
 
+  renderStatusSelection() {
+    const { taskEditing, } = this.props;
+    let xhtml = null;
+    if (taskEditing && taskEditing.id) {
+      xhtml = (
+        <Field
+          id="status"
+          name="status"
+          component={renderSelectField}
+          label="Trạng thái"
+        >
+          <option value={0}>Ready</option>
+          <option value={1}>In progress</option>
+          <option value={2}>Completed</option>
+        </Field>
+      );
+    }
+    return xhtml;
+  }
+
   render() {
     const {
       classes,
@@ -44,6 +65,18 @@ class TaskForm extends Component {
             <Field
               id="title"
               label="Tiêu đề"
+              // inputProps={{ style: { fontSize: 20, }, }} // font size of input text
+              // InputLabelProps={{ style: { fontSize: 20, }, }}
+              InputProps={{
+                classes: {
+                  input: classes.resize1,
+                },
+              }}
+              InputLabelProps={{
+                classes: {
+                  root: classes.resize1,
+                },
+              }}
               className={classes.textfield}
               margin="normal"
               name="title"
@@ -54,6 +87,16 @@ class TaskForm extends Component {
             <Field
               id="description"
               label="Mô tả"
+              InputProps={{
+                classes: {
+                  input: classes.resize2,
+                },
+              }}
+              InputLabelProps={{
+                classes: {
+                  root: classes.resize2,
+                },
+              }}
               multiline
               rowsMax="4"
               className={classes.textfield}
@@ -62,6 +105,8 @@ class TaskForm extends Component {
               component={renderTextField}
             />
           </Grid>
+
+          {this.renderStatusSelection()}
 
           <Grid item xs={12}>
             <Box display="flex" flexDirection="row-reverse">
@@ -95,6 +140,9 @@ TaskForm.propTypes = {
   classes: PropTypes.shape({
     modal: PropTypes.shape.isRequired,
     textfield: PropTypes.shape.isRequired,
+    select: PropTypes.shape.isRequired,
+    resize1: PropTypes.shape.isRequired,
+    resize2: PropTypes.shape.isRequired,
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   modalActionsCreator: PropTypes.shape({

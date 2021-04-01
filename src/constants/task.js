@@ -7,3 +7,6 @@ export const ADD_TASK = 'ADD_TASK';
 export const ADD_TASK_SUCESS = 'ADD_TASK_SUCESS';
 export const ADD_TASK_FAILED = 'ADD_TASK_FAILED';
 export const SET_TASK_EDITING = 'SET_TASK_EDITING';
+export const UPDATE_TASK = 'UPDATE_TASK';
+export const UPDATE_TASK_SUCESS = 'UPDATE_TASK_SUCESS';
+export const UPDATE_TASK_FAILED = 'UPDATE_TASK_FAILED';

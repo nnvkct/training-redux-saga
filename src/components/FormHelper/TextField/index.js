@@ -7,21 +7,17 @@ const renderTextField = ({
   input,
   meta: { touched, invalid, error, },
   ...custom
-}) => {
-  console.log('input', { input, });
-  return (
-    <TextField
-      label={label}
-      placeholder={label}
-      error={touched && invalid}
-      helperText={touched && error}
-      /* eslint-disable react/jsx-props-no-spreading */
-      {...input}
-      {...custom}
-    />
-  );
-};
-
+}) => (
+  <TextField
+    label={label}
+    placeholder={label}
+    error={touched && invalid}
+    helperText={touched && error}
+    /* eslint-disable react/jsx-props-no-spreading */
+    {...input}
+    {...custom}
+  />
+);
 renderTextField.propTypes = {
   label: PropTypes.string.isRequired,
   input: PropTypes.shape.isRequired,

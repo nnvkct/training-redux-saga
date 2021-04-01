@@ -1,12 +1,14 @@
 import { Box, Grid, } from '@material-ui/core';
 import { withStyles, } from '@material-ui/styles';
-import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component, } from 'react';
+import uuid from 'react-uuid';
 import TaskItem from '../TaskItem';
 import styles from './styles';
 
 class TaskList extends Component {
   render() {
+    console.log('uuid=', uuid());
     const { classes, tasks, status, onClickEdit, } = this.props;
     return (
       <Grid item md={4} xs={12} key={status.value}>
@@ -18,7 +20,7 @@ class TaskList extends Component {
             <Box mb={2}>
               <TaskItem
                 task={task}
-                key={task.id}
+                key={uuid()}
                 status={status}
                 onClickEdit={() => onClickEdit(task)}
               />
