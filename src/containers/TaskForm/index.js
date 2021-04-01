@@ -13,18 +13,10 @@ import validate from './validate';
 
 class TaskForm extends Component {
   componentDidMount() {
-    const { dispatch, taskEditing, } = this.props;
-    if (dispatch && taskEditing) {
-      dispatch({
-        type: '@@redux-form/CHANGE',
-        meta: { form: 'TASK_MANAGEMENT', field: 'title', },
-        payload: taskEditing.title,
-      });
-      dispatch({
-        type: '@@redux-form/CHANGE',
-        meta: { form: 'TASK_MANAGEMENT', field: 'description', },
-        payload: taskEditing.description,
-      });
+    const { taskEditing, initialize, } = this.props;
+
+    if (taskEditing) {
+      initialize(taskEditing);
     }
   }
 
@@ -114,6 +106,7 @@ TaskForm.propTypes = {
   invalid: PropTypes.bool.isRequired,
   submmitting: PropTypes.bool,
   taskEditing: PropTypes.shape.isRequired,
+  initialize: PropTypes.func.isRequired,
 };
 
 TaskForm.defaultProps = {
@@ -134,6 +127,8 @@ const withReduxForm = reduxForm({
   // a unique name for the form
   form: FORM_NAME,
   validate,
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
 });
 
 export default compose(
