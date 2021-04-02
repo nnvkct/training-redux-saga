@@ -14,6 +14,9 @@ const store = configureStore();
 
 class App extends Component {
   render() {
+    console.warn = () => {}; // Disable warnings in console
+    console.error = () => {}; // Disable errors in console
+
     return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>

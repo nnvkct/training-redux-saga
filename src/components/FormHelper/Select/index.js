@@ -6,6 +6,8 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles, } from '@material-ui/styles';
+import styles from './styles';
 
 const renderFromHelper = ({ touched, error, }) => {
   if (!(touched && error)) {
@@ -15,16 +17,16 @@ const renderFromHelper = ({ touched, error, }) => {
 };
 
 const renderSelectField = ({
+  classes,
   input,
   label,
   meta: { touched, error, },
   children,
   ...custom
 }) => (
-  <FormControl error={touched && error}>
+  <FormControl className={classes.formControl} error={touched && error}>
     <InputLabel htmlFor="color-native-simple">{label}</InputLabel>
     <Select
-      native
       /* eslint-disable react/jsx-props-no-spreading */
       {...input}
       {...custom}
@@ -32,6 +34,7 @@ const renderSelectField = ({
         name: input.name,
         id: 'color-native-simple',
       }}
+      value={input.value}
     >
       {children}
     </Select>
@@ -41,8 +44,9 @@ const renderSelectField = ({
 
 renderSelectField.propTypes = {
   label: PropTypes.string.isRequired,
-  input: PropTypes.shape.isRequired,
-  meta: PropTypes.shape.isRequired,
+  input: PropTypes.objectOf(PropTypes.any).isRequired,
+  meta: PropTypes.objectOf(PropTypes.any).isRequired,
+  classes: PropTypes.shape().isRequired,
 };
 
-export default renderSelectField;
+export default withStyles(styles)(renderSelectField);

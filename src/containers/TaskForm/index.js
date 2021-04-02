@@ -1,4 +1,4 @@
-import { Box, Button, Grid, } from '@material-ui/core';
+import { Box, Button, Grid, MenuItem, } from '@material-ui/core';
 import { withStyles, } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, { Component, } from 'react';
@@ -39,9 +39,9 @@ class TaskForm extends Component {
           component={renderSelectField}
           label="Trạng thái"
         >
-          <option value={0}>Ready</option>
-          <option value={1}>In progress</option>
-          <option value={2}>Completed</option>
+          <MenuItem value={0}>Ready</MenuItem>
+          <MenuItem value={1}>In progress</MenuItem>
+          <MenuItem value={2}>Completed</MenuItem>
         </Field>
       );
     }
@@ -153,7 +153,7 @@ TaskForm.propTypes = {
   }).isRequired,
   invalid: PropTypes.bool.isRequired,
   submmitting: PropTypes.bool,
-  taskEditing: PropTypes.shape.isRequired,
+  taskEditing: PropTypes.objectOf(PropTypes.any).isRequired,
   initialize: PropTypes.func.isRequired,
 };
 

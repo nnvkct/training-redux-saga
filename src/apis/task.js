@@ -8,7 +8,6 @@ export const getList = (params = {}) => {
   if (Object.keys(params).length > 0) {
     queryParams = `?${qs.stringify(params)}`;
   }
-  console.log(`${API_ENDPOINT}/${url}${queryParams}`);
   return axiosService.get(`${API_ENDPOINT}/${url}${queryParams}`);
 };
 export const addTask = (data) =>

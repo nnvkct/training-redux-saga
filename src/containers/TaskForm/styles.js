@@ -1,4 +1,4 @@
-const styles = () => ({
+const styles = (theme) => ({
   textfield: {
     width: '100%',
   },
@@ -7,6 +7,10 @@ const styles = () => ({
   },
   resize2: {
     fontSize: 15,
+  },
+  select: {
+    // margin: theme.spacing(1),
+    // width: '100%',
   },
 });
 
