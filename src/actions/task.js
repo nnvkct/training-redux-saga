@@ -1,4 +1,5 @@
 import * as taskConstants from '../constants/task';
+import { STATUSES, } from '../constants';
 
 export const fetchListTaskSuccess = (data) => ({
   type: taskConstants.FETCH_TASK_SUCESS,
@@ -71,7 +72,7 @@ export const updateTaskFailed = (error) => ({
   },
 });
 
-export const updateTask = (title, description) => ({
+export const updateTask = (title, description, status = STATUSES[0].value) => ({
   type: taskConstants.UPDATE_TASK,
-  payload: { title, description, },
+  payload: { title, description, status, },
 });

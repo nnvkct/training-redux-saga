@@ -22,10 +22,14 @@ class TaskForm extends Component {
   }
 
   handleSumbitForm = (data) => {
-    const { taskActionsCreator, } = this.props;
-    const { addTask, } = taskActionsCreator;
-    const { title, description, } = data;
-    addTask(title, description);
+    const { taskActionsCreator, taskEditing, } = this.props;
+    const { addTask, updateTask, } = taskActionsCreator;
+    const { title, description, status, } = data;
+    if (taskEditing && taskEditing.id) {
+      updateTask(title, description, status);
+    } else {
+      addTask(title, description);
+    }
   };
 
   renderStatusSelection() {
@@ -150,6 +154,7 @@ TaskForm.propTypes = {
   }).isRequired,
   taskActionsCreator: PropTypes.shape({
     addTask: PropTypes.func.isRequired,
+    updateTask: PropTypes.func.isRequired,
   }).isRequired,
   invalid: PropTypes.bool.isRequired,
   submmitting: PropTypes.bool,

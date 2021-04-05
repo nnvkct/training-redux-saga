@@ -23,26 +23,6 @@ class TaskBoard extends Component {
     fetchListTask();
   }
 
-  openForm = () => {
-    const { modalActionCreators, taskActionCreators, } = this.props;
-    const {
-      showModal,
-      changeModalTitle,
-      changeModalContent,
-    } = modalActionCreators;
-    const { setTaskEditing, } = taskActionCreators;
-    setTaskEditing(null);
-    showModal();
-    changeModalTitle('Thêm mới công việc');
-    changeModalContent(<TaskForm />);
-  };
-
-  loadData = () => {
-    const { taskActionCreators, } = this.props;
-    const { fetchListTask, } = taskActionCreators;
-    fetchListTask();
-  };
-
   handleFilter = (e) => {
     const { value, } = e.target;
     const { taskActionCreators, } = this.props;
@@ -62,6 +42,67 @@ class TaskBoard extends Component {
     } = modalActionCreators;
     showModal();
     changeModalTitle('Cập nhật công việc');
+    changeModalContent(<TaskForm />);
+  };
+
+  handleDeleteTask(task) {
+    console.log('task: ', task);
+  }
+
+  showModalDeleteTask = (task) => {
+    const { modalActionCreators, classes, } = this.props;
+
+    const {
+      showModal,
+      hideModal,
+      changeModalTitle,
+      changeModalContent,
+    } = modalActionCreators;
+    showModal();
+    changeModalTitle('Xóa công việc');
+    changeModalContent(
+      <div className={classes.modalDelete}>
+        <div className={classes.modalConfirmText}>
+          Bạn chắc chắn muốn xóa công việc{' '}
+          <span className={classes.modalConfirmTextBold}>{task.title}</span> ?
+        </div>
+        <Box display="flex" flexDirection="row-reverse" mt={2}>
+          <Box ml={1}>
+            <Button variant="contained" onClick={hideModal}>
+              Hủy bỏ
+            </Button>
+          </Box>
+          <Box ml={1}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => this.handleDeleteTask(task)}
+            >
+              Đồng ý
+            </Button>
+          </Box>
+        </Box>
+      </div>
+    );
+  };
+
+  loadData = () => {
+    const { taskActionCreators, } = this.props;
+    const { fetchListTask, } = taskActionCreators;
+    fetchListTask();
+  };
+
+  openForm = () => {
+    const { modalActionCreators, taskActionCreators, } = this.props;
+    const {
+      showModal,
+      changeModalTitle,
+      changeModalContent,
+    } = modalActionCreators;
+    const { setTaskEditing, } = taskActionCreators;
+    setTaskEditing(null);
+    showModal();
+    changeModalTitle('Thêm mới công việc');
     changeModalContent(<TaskForm />);
   };
 
@@ -86,6 +127,7 @@ class TaskBoard extends Component {
               status={status}
               key={uuid()}
               onClickEdit={this.handleEditTask}
+              onClickDelete={this.showModalDeleteTask}
             />
           );
         })}

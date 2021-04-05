@@ -62,6 +62,36 @@ const reducer = (state = initialState, action) => {
         taskEditing: task,
       };
     }
+    case taskConstants.UPDATE_TASK: {
+      return {
+        ...state,
+      };
+    }
+    case taskConstants.UPDATE_TASK_SUCESS: {
+      const { data, } = action.payload;
+      const { listTask, } = state;
+      const index = listTask.findIndex((item) => item.id === data.id);
+      let newList = [];
+      if (index !== -1) {
+        newList = [
+          ...listTask.slice(0, index),
+          data,
+          ...listTask.slice(index + 1),
+        ];
+      }
+      return {
+        ...state,
+        listTask: newList,
+      };
+    }
+    case taskConstants.UPDATE_TASK_FAILED: {
+      const { error, } = action.payload;
+      toastError(error);
+      return {
+        ...state,
+      };
+    }
+
     default:
       return state;
   }

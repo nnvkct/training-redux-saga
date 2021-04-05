@@ -10,13 +10,8 @@ const styles = (theme) => ({
     backgroundColor: theme.color.primary,
     color: theme.shape.textColor,
   },
-  button: {
-    // margin: theme.spacing(2),
-  },
-  status: {
-    // padding: theme.spacing(1),
-    // textAlign: 'center',
-    // color: theme.shape.textColor,
+  modalConfirmTextBold: {
+    fontWeight: 700,
   },
 });
 
