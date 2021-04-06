@@ -1,18 +1,6 @@
 {
   "tasks": [
     {
-      "title": "Read book7",
-      "description": "Learning React.js",
-      "status": 1,
-      "id": 1
-    },
-    {
-      "id": 2,
-      "title": "Play game",
-      "description": "with my friend",
-      "status": 1
-    },
-    {
       "id": 3,
       "title": "Learning java",
       "description": "",
@@ -27,38 +15,14 @@
     {
       "title": "Listening Music",
       "description": "Alibaba Alibaba222",
-      "status": 1,
+      "status": 2,
       "id": 5
-    },
-    {
-      "title": "Tối 3-5-7",
-      "description": "Learning ReactJS now",
-      "status": 0,
-      "id": 6
-    },
-    {
-      "title": "Read book1",
-      "description": "Learning React.js",
-      "status": 0,
-      "id": 7
     },
     {
       "title": "Học Javascript 3.0",
       "description": "Tối 2-4-6 18:00",
       "status": 0,
       "id": 8
-    },
-    {
-      "title": "Chơi game",
-      "description": "Tối 2-4-6 tại Quan Ong Cau",
-      "status": 0,
-      "id": 9
-    },
-    {
-      "title": "Read book2",
-      "description": "Hello world 5555",
-      "status": 0,
-      "id": 10
     }
   ]
 }

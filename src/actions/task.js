@@ -76,3 +76,22 @@ export const updateTask = (title, description, status = STATUSES[0].value) => ({
   type: taskConstants.UPDATE_TASK,
   payload: { title, description, status, },
 });
+
+export const deleteTaskSuccess = (data) => ({
+  type: taskConstants.DELETE_TASK_SUCESS,
+  payload: {
+    data,
+  },
+});
+
+export const deleteTaskFailed = (error) => ({
+  type: taskConstants.DELETE_TASK_FAILED,
+  payload: {
+    error,
+  },
+});
+
+export const deleteTask = (id) => ({
+  type: taskConstants.DELETE_TASK,
+  payload: id,
+});
