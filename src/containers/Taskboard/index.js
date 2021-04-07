@@ -23,14 +23,14 @@ class TaskBoard extends Component {
     fetchListTask();
   }
 
-  handleFilter = (e) => {
+  handleFilter = e => {
     const { value, } = e.target;
     const { taskActionCreators, } = this.props;
     const { filterTask, } = taskActionCreators;
     filterTask(value);
   };
 
-  handleEditTask = (task) => {
+  handleEditTask = task => {
     const { taskActionCreators, modalActionCreators, } = this.props;
     const { setTaskEditing, } = taskActionCreators;
     setTaskEditing(task);
@@ -51,7 +51,7 @@ class TaskBoard extends Component {
     deleteTask(task.id);
   }
 
-  showModalDeleteTask = (task) => {
+  showModalDeleteTask = task => {
     const { modalActionCreators, classes, } = this.props;
 
     const {
@@ -119,9 +119,9 @@ class TaskBoard extends Component {
     let xhtml = null;
     xhtml = (
       <Grid container spacing={2}>
-        {STATUSES.map((status) => {
+        {STATUSES.map(status => {
           const taskFilter = listTask.filter(
-            (task) => task.status === status.value
+            task => task.status === status.value
           );
           return (
             <TaskList
@@ -165,14 +165,13 @@ class TaskBoard extends Component {
           </div>
           {this.renderSerchBox()}
           {this.renderBoard()}
-          {/* {this.renderForm()} */}
         </Box>
       </div>
     );
   }
 }
 
-const mapStatetoProps = (state) => ({ listTask: state.task.listTask, });
+const mapStatetoProps = state => ({ listTask: state.task.listTask, });
 
 TaskBoard.propTypes = {
   classes: PropTypes.shape({
@@ -194,7 +193,7 @@ TaskBoard.propTypes = {
   listTask: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   taskActionCreators: bindActionCreators(taskActions, dispatch),
   modalActionCreators: bindActionCreators(modalActions, dispatch),
 });

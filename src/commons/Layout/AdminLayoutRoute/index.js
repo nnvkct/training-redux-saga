@@ -14,7 +14,7 @@ class AdminLayoutRoute extends Component {
         /* eslint-disable react/jsx-props-no-spreading */
         {...remainProps}
         render={(routeProps) => (
-          <Dashboard>
+          <Dashboard {...remainProps}>
             <YourComponent {...routeProps} />
           </Dashboard>
         )}
