@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "prettier \"src/**/*.{js,css}\"",
+    "prettier": "prettier \"src/**/*.{js}\"",
     "format": "prettier-eslint --write \"src/**/*.{js}\"",
     "prepare": "husky install",
     "pre-commit": "env FORCE_COLOR=1 lint-staged",
@@ -69,7 +69,7 @@
     "prettier-eslint-cli": "^5.0.1"
   },
   "lint-staged": {
-    "**/*.{js,css}": [
+    "**/*.{js}": [
       "npm run format",
       "eslint src"
     ]
