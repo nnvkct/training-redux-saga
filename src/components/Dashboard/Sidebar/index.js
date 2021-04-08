@@ -1,27 +1,27 @@
 import { Toolbar, } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { withStyles, } from '@material-ui/styles';
+import PropTypes from 'prop-types';
 import React from 'react';
+import { NavLink, } from 'react-router-dom';
+import { ADMIN_ROUTES, } from '../../../constants/routes';
 import styles from './styles';
 
 function Sidebar(props) {
-  const { classes, } = props;
+  const { classes, showSidebar, } = props;
 
   return (
     <div className={classes.root}>
-      {/* <CssBaseline /> */}
+      <CssBaseline />
 
       <Drawer
+        open={showSidebar}
         className={classes.drawer}
-        variant="permanent"
+        variant="persistent"
         classes={{
           paper: classes.drawerPaper,
         }}
@@ -29,24 +29,18 @@ function Sidebar(props) {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts',].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam',].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
+            {ADMIN_ROUTES.map(item => (
+              <NavLink
+                to={item.path}
+                exact={item.exact}
+                className={classes.menuLink}
+                activeClassName={classes.menuLinkActive}
+                key={item.path}
+              >
+                <ListItem button key={item.path}>
+                  <ListItemText primary={item.name} />
+                </ListItem>
+              </NavLink>
             ))}
           </List>
         </div>
@@ -55,4 +49,8 @@ function Sidebar(props) {
   );
 }
 
+Sidebar.propTypes = {
+  classes: PropTypes.shape.isRequired,
+  showSidebar: PropTypes.bool.isRequired,
+};
 export default withStyles(styles)(Sidebar);

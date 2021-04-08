@@ -17,17 +17,20 @@ import SearchIcon from '@material-ui/icons/Search';
 import { withStyles, } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect, } from 'react-redux';
+import { bindActionCreators, compose, } from 'redux';
 import styles from './styles';
+import * as uiActions from '../../../actions/ui';
 
 function Header(props) {
-  const { classes, name, } = props;
+  const { classes, name, showSidebar, onToggleSidebar, } = props;
   const [anchorEl, setAnchorEl,] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl,] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -40,7 +43,13 @@ function Header(props) {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
+  const handleToggleSidebar = () => {
+    if (onToggleSidebar) {
+      onToggleSidebar(!showSidebar);
+    }
+  };
+
+  const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -110,6 +119,7 @@ function Header(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleToggleSidebar}
           >
             <MenuIcon />
           </IconButton>
@@ -174,6 +184,14 @@ function Header(props) {
 Header.propTypes = {
   classes: PropTypes.shape.isRequired,
   name: PropTypes.string.isRequired,
+  showSidebar: PropTypes.bool.isRequired,
+  onToggleSidebar: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Header);
+const mapStateToProps = state => ({
+  showSidebar: state.ui.showSidebar,
+});
+
+const withConnect = connect(mapStateToProps, null);
+
+export default compose(withConnect, withStyles(styles))(Header);

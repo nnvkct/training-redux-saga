@@ -1,11 +1,8 @@
 const drawerWidth = 240;
 
-const styles = (theme) => ({
+const styles = theme => ({
   root: {
     display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
   },
   drawer: {
     width: drawerWidth,
@@ -13,14 +10,20 @@ const styles = (theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    // position: 'relative',
+    zIndex: 10,
   },
   drawerContainer: {
     overflow: 'auto',
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+  menuLink: {
+    textDecoration: 'none',
+    color: theme.color.primary,
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
+  menuLinkActive: {
+    '&>div': { backgroundColor: theme.color.hover, },
   },
 });
 

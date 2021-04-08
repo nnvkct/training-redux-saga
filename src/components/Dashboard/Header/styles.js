@@ -2,7 +2,7 @@ import { fade, } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: 20,
   },
   grow: {
     flexGrow: 1,
