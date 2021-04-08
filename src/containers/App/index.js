@@ -18,7 +18,7 @@ const store = configureStore();
 class App extends Component {
   renderAdminRoutes() {
     let xhtml = null;
-    xhtml = ADMIN_ROUTES.map(route => (
+    xhtml = ADMIN_ROUTES.map((route) => (
       <AdminLayoutRoute
         key={route.path}
         path={route.path}
@@ -40,7 +40,7 @@ class App extends Component {
           <ThemeProvider theme={theme}>
             <ToastContainer />
             <GlobalLoading />
-            {/* <CssBaseline /> */}
+            <CssBaseline />
             <Switch>{this.renderAdminRoutes()}</Switch>
             <CommonModal />
           </ThemeProvider>
