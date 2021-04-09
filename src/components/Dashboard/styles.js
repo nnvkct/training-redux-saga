@@ -1,4 +1,4 @@
-const styles = () => ({
+const styles = theme => ({
   wrapper: {
     display: 'flex',
     flexDirecton: 'row',
@@ -8,6 +8,17 @@ const styles = () => ({
   },
   wrapperContent: {
     width: '100%',
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  shiftLeft: {
+    marginLeft: -240,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
 });
 

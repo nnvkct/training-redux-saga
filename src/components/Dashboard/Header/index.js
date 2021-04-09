@@ -18,9 +18,9 @@ import { withStyles, } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect, } from 'react-redux';
-import { bindActionCreators, compose, } from 'redux';
+import { compose, } from 'redux';
+import { withRouter, } from 'react-router-dom';
 import styles from './styles';
-import * as uiActions from '../../../actions/ui';
 
 function Header(props) {
   const { classes, name, showSidebar, onToggleSidebar, } = props;
@@ -53,6 +53,15 @@ function Header(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    setAnchorEl(null);
+    setMobileMoreAnchorEl(null);
+    const { history, } = props;
+    if (history) {
+      history.push('/login');
+    }
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -65,7 +74,7 @@ function Header(props) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -186,6 +195,7 @@ Header.propTypes = {
   name: PropTypes.string.isRequired,
   showSidebar: PropTypes.bool.isRequired,
   onToggleSidebar: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -194,4 +204,4 @@ const mapStateToProps = state => ({
 
 const withConnect = connect(mapStateToProps, null);
 
-export default compose(withConnect, withStyles(styles))(Header);
+export default compose(withConnect, withRouter, withStyles(styles))(Header);

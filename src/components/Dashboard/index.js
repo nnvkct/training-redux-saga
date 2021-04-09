@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component, } from 'react';
 import { connect, } from 'react-redux';
 import { compose, bindActionCreators, } from 'redux';
+import cn from 'classnames';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import styles from './styles';
@@ -29,7 +30,11 @@ class Dashboard extends Component {
           <div className={classes.wrapperSidebar}>
             <Sidebar showSidebar={showSidebar} />
           </div>
-          <div className={classes.wrapperContent}>
+          <div
+            className={cn(classes.wrapperContent, {
+              [classes.shiftLeft]: showSidebar === false,
+            })}
+          >
             <Toolbar />
             {children}
           </div>

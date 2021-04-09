@@ -9,17 +9,32 @@ import AdminLayoutRoute from '../../commons/Layout/AdminLayoutRoute';
 import theme from '../../commons/Theme';
 import CommonModal from '../../components/CommonModal';
 import GlobalLoading from '../../components/GlobalLoading';
-import { ADMIN_ROUTES, } from '../../constants/routes';
+import { ADMIN_ROUTES, ROUTES, } from '../../constants/routes';
 import configureStore from '../../redux/configureStore';
 import styles from './styles';
+import DefaultLayoutRoute from '../../commons/Layout/DefaultLayoutRoute';
 
 const store = configureStore();
 
 class App extends Component {
   renderAdminRoutes() {
     let xhtml = null;
-    xhtml = ADMIN_ROUTES.map((route) => (
+    xhtml = ADMIN_ROUTES.map(route => (
       <AdminLayoutRoute
+        key={route.path}
+        path={route.path}
+        component={route.component}
+        exact={route.exact}
+        name={route.name}
+      />
+    ));
+    return xhtml;
+  }
+
+  renderDefaultRoutes() {
+    let xhtml = null;
+    xhtml = ROUTES.map(route => (
+      <DefaultLayoutRoute
         key={route.path}
         path={route.path}
         component={route.component}
@@ -41,7 +56,10 @@ class App extends Component {
             <ToastContainer />
             <GlobalLoading />
             <CssBaseline />
-            <Switch>{this.renderAdminRoutes()}</Switch>
+            <Switch>
+              {this.renderAdminRoutes()}
+              {this.renderDefaultRoutes()}
+            </Switch>
             <CommonModal />
           </ThemeProvider>
         </BrowserRouter>
